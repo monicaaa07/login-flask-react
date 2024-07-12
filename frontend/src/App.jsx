@@ -21,7 +21,10 @@ function App() {
     <div>
       <h1>Simple Scatter Chart</h1>
       {data.length > 0 ? (
-        <SimpleScatterChart data={data} />
+        <div className="charts-container">
+        <SimpleScatterChart data={data} xAxis="sepal.length" yAxis={["sepal.width", "petal.length", "petal.width"]} />
+        <SimpleScatterChart data={data} xAxis="petal.length" yAxis={["sepal.width", "sepal.length", "petal.width"]} />
+      </div>
       ) : (
         <p>Loading data...</p>
       )}

@@ -10,10 +10,9 @@ import {
 } from 'recharts';
 import Slider from '@mui/material/Slider';
 
-const SimpleScatterChart = ({data}) => {
+const SimpleScatterChart = ({data, xAxis, yAxis}) => {
   const [selectedMetric, setSelectedMetric] = useState('sepal.width');
   const [yBounds, setYBounds] = useState([0, 10]);
-  const maxYValue = Math.max(...data.map(item => item[selectedMetric] || 0));
 
   const handleCheckboxChange = (metric) => {
     setSelectedMetric(metric);
@@ -25,48 +24,33 @@ const SimpleScatterChart = ({data}) => {
     setYBounds([0, maxYValue]);
   }, [selectedMetric, data]);
 
+  const handleSliderChange = (newValue) => {
+    setYBounds(newValue);
+  };
+
 
   return (
-    <>
     <div>
-        <label>
-          <input
-            type="radio"
-            name="yMetric"
-            value="sepalWidth"
-            checked={selectedMetric === 'sepal.width'}
-            onChange={() => handleCheckboxChange('sepal.width')}
-          />
-          Sepal Width
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="yMetric"
-            value="petalLength"
-            checked={selectedMetric === 'petal.length'}
-            onChange={() => handleCheckboxChange('petal.length')}
-          />
-          Petal Length
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="yMetric"
-            value="petalWidth"
-            checked={selectedMetric === 'petal.width'}
-            onChange={() => handleCheckboxChange('petal.width')}
-          />
-          Petal Width
-        </label>
+    <div>
+        {yAxis.map((metric) => (
+          <label key={metric}>
+            <input
+              type="radio"
+              name="yMetric"
+              value={metric}
+              checked={selectedMetric === metric}
+              onChange={() => handleCheckboxChange(metric)}
+            />
+            {metric}
+          </label>))}
       </div>
       <div style={{ margin: '20px 0' }}>
         <span>Y Axis Bounds: {yBounds[0]} - {yBounds[1]}</span>
         <Slider
           value={yBounds}
-          onChange={(e, newValue) => setYBounds(newValue)}
+          onChange={(e, newValue) => handleSliderChange(newValue)}
           min={0}
-          max={maxYValue}
+          max={Math.max(...data.map(item => item[selectedMetric] || 0))}
           step={0.01}
           valueLabelDisplay="auto"
         />
@@ -74,13 +58,13 @@ const SimpleScatterChart = ({data}) => {
     <ResponsiveContainer width="100%" height={400}>
       <ScatterChart>
         <CartesianGrid />
-        <XAxis type="number" dataKey="sepal.length" name="X Axis" />
-        <YAxis type="number" dataKey={selectedMetric} domain={yBounds} name="Y Axis" />
+        <XAxis type="number" dataKey={xAxis} name="X Axis" />
+        <YAxis type="number" dataKey={selectedMetric} domain={[yBounds[0],yBounds[1]]} name="Y Axis" />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} />
         <Scatter name="Sample Data" data={data} fill="#8884d8" />
       </ScatterChart>
     </ResponsiveContainer>
-    </>
+    </div>
   );
 };
 
