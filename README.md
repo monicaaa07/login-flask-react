@@ -34,6 +34,9 @@ On 3000 you should see a login screen as below:
 
 Login using user :  'setosa_user@example.com' for  'Iris-setosa' plots  OR   'virginica_user@example.com' for 'Iris-virginica' plots
 
+A scatter plot as below will be displayed:
+![Alt text](<Screenshot 2024-07-13 at 2.38.08 AM.png>)
+
 # About the App
 
 The App uses a flask backend and react  frontend created using Vite. It has a login which currently supports 2 email Ids: 'setosa_user@example.com' &  'virginica_user@example.com'. Once they are validated, a token is sent from the server to u\UI which is saved in browser cookies to savethe session. The logout function, clears the cookies. Based on the user, data is conditionally returned from the server and displayed as scatter plots.
