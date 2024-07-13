@@ -1,7 +1,11 @@
 .charts-container {
   margin-left: 30%;
-  width:150%;
   display: flex;
   justify-content: space-between;
   gap: 20px;
+}
+
+.login {
+  margin-top: 20%;
+  margin-left: 35%;
 }
