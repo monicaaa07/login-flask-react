@@ -1,3 +1,43 @@
+# PREREQUISITES:
+Node: 20
+python 3.9
+pip package manager installed or docker desktop
+npm package manager for node
+
+
+# HOW TO RUN THIS PROJECT
+
+** Run the Flask server ** in either docker on non-docker environment.  
+    1) cd in backend folder: cd backend.
+
+    To execute in Python docker enviromemt: 
+    2) Build docker image : docker build -t backend .
+    3) Run container : docker run -p 5000:5000 backend
+
+    To execute in non docker  environment:
+    2)Setup Virtual Environment (Optional but Recommended): python -m venv venv
+    3)source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    4)Install Dependencies: cd backend
+                            pip install -r requirements.txt
+    5) Run Flask Application: python app.py
+The Flask app should now be running at http://localhost:5000.
+
+
+** Running React Frontend
+    1) Install Dependencies: cd frontend
+                             npm install
+    2) Run React Application: npm run dev
+The React app should now be running at http://localhost:3000.
+
+On 3000 you should see a login screen as below:
+![Alt text](<Screenshot 2024-07-13 at 2.38.33 AM.png>)
+
+Login using user :  'setosa_user@example.com' for  'Iris-setosa' plots  OR   'virginica_user@example.com' for 'Iris-virginica' plots
+
+# About the App
+
+The App uses a flask backend and react  frontend created using Vite. It has a login which currently supports 2 email Ids: 'setosa_user@example.com' &  'virginica_user@example.com'. Once they are validated, a token is sent from the server to u\UI which is saved in browser cookies to savethe session. The logout function, clears the cookies. Based on the user, data is conditionally returned from the server and displayed as scatter plots.
+
 # full_stack_sample_problem
 
 In this folder you will find the well know Iris data set. You may use the version included or download scikit-learn and use the copy included in the distribution:
